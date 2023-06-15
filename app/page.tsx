@@ -1,18 +1,8 @@
-const getStories = async () => {
-    const res = await fetch(
-        "https://hacker-news.firebaseio.com/v0/topstories.json"
-    )
-    const data = await res.json()
-    return data
-}
+import Link from "next/link"
+import { getItem, getStories } from "@/utils/hackerNews"
 
-const getStory = async (id: number) => {
-    const res = await fetch(
-        `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-    )
-    const data = await res.json()
-    return data
-}
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
 
 const IndexPage = async () => {
     const stories = await getStories()
@@ -26,14 +16,29 @@ const IndexPage = async () => {
                 </h1>
                 {stories.map((story: any) => (
                     <div key={story}>
-                        {getStory(story).then((data) => (
-                            <div className="flex flex-col gap-2">
-                                <a
-                                    href={data.url}
-                                    className="text-xl font-bold leading-tight tracking-tighter md:text-2xl"
-                                >
-                                    {data.title}
-                                </a>
+                        {getItem(story).then((data) => (
+                            <div>
+                                <div className="flex items-center">
+                                    <a href={data.url}>
+                                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                            {data.title}
+                                        </h2>
+                                    </a>
+                                    <div className="ml-2">
+                                        <span>by </span>
+                                        <Link href="#">
+                                            <Badge>{data.by}</Badge>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Link href={`/discussion/${data.id}`}>
+                                        <span className="text-slate-900 dark:text-slate-400">
+                                            {data.descendants} comments
+                                        </span>
+                                    </Link>
+                                </div>
+                                <Separator className="my-4 h-1" />
                             </div>
                         ))}
                     </div>
