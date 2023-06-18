@@ -46,14 +46,14 @@ const IndexPage = async () => {
                                         </p>
                                     </a>
                                     <a href="#" className="ml-2">
-                                        <span className="font-slate-100">
+                                        <span>
                                             by <Badge>{data.by}</Badge>
                                         </span>
                                     </a>
                                 </div>
                                 <div>
                                     <a href={`/discussion/${data.id}`}>
-                                        <span className="font-slate-100">
+                                        <span className="text-slate-900 dark:text-slate-400">
                                             {data.descendants} comments
                                         </span>
                                     </a>
