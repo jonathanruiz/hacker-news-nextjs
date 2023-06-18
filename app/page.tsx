@@ -17,6 +17,14 @@ const getStory = async (id: number) => {
     return data
 }
 
+const getUser = async (user: string) => {
+    const res = await fetch(
+        `https://hacker-news.firebaseio.com/v0/user/${user}.json`
+    )
+    const data = await res.json()
+    return data
+}
+
 const IndexPage = async () => {
     const stories = await getStories()
     stories.length = 20 // limit stories to 20
@@ -37,11 +45,11 @@ const IndexPage = async () => {
                                             {data.title}
                                         </p>
                                     </a>
-                                    <div className="ml-2">
+                                    <a href="#" className="ml-2">
                                         <span className="font-slate-100">
                                             by <Badge>{data.by}</Badge>
                                         </span>
-                                    </div>
+                                    </a>
                                 </div>
                                 <Separator className="my-4 h-1" />
                             </div>
