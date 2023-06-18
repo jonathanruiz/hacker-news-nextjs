@@ -1,3 +1,6 @@
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+
 const getStories = async () => {
     const res = await fetch(
         "https://hacker-news.firebaseio.com/v0/topstories.json"
@@ -9,6 +12,14 @@ const getStories = async () => {
 const getStory = async (id: number) => {
     const res = await fetch(
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+    )
+    const data = await res.json()
+    return data
+}
+
+const getUser = async (user: string) => {
+    const res = await fetch(
+        `https://hacker-news.firebaseio.com/v0/user/${user}.json`
     )
     const data = await res.json()
     return data
@@ -27,13 +38,20 @@ const IndexPage = async () => {
                 {stories.map((story: any) => (
                     <div key={story}>
                         {getStory(story).then((data) => (
-                            <div className="flex flex-col gap-2">
-                                <a
-                                    href={data.url}
-                                    className="text-xl font-bold leading-tight tracking-tighter md:text-2xl"
-                                >
-                                    {data.title}
-                                </a>
+                            <div>
+                                <div className="flex items-center">
+                                    <a href={data.url}>
+                                        <p className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                            {data.title}
+                                        </p>
+                                    </a>
+                                    <a href="#" className="ml-2">
+                                        <span className="font-slate-100">
+                                            by <Badge>{data.by}</Badge>
+                                        </span>
+                                    </a>
+                                </div>
+                                <Separator className="my-4 h-1" />
                             </div>
                         ))}
                     </div>
