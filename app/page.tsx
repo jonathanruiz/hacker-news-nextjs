@@ -1,31 +1,8 @@
 import Link from "next/link"
+import { getStories, getStory } from "@/utils/hackernews"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-
-const getStories = async () => {
-    const res = await fetch(
-        "https://hacker-news.firebaseio.com/v0/topstories.json"
-    )
-    const data = await res.json()
-    return data
-}
-
-const getStory = async (id: number) => {
-    const res = await fetch(
-        `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-    )
-    const data = await res.json()
-    return data
-}
-
-const getUser = async (user: string) => {
-    const res = await fetch(
-        `https://hacker-news.firebaseio.com/v0/user/${user}.json`
-    )
-    const data = await res.json()
-    return data
-}
 
 const IndexPage = async () => {
     const stories = await getStories()
