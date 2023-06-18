@@ -51,6 +51,13 @@ const IndexPage = async () => {
                                         </span>
                                     </a>
                                 </div>
+                                <div>
+                                    <a href={`/discussion/${data.id}`}>
+                                        <span className="font-slate-100">
+                                            {data.descendants} comments
+                                        </span>
+                                    </a>
+                                </div>
                                 <Separator className="my-4 h-1" />
                             </div>
                         ))}
