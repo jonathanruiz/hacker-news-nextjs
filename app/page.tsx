@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
@@ -45,18 +47,18 @@ const IndexPage = async () => {
                                             {data.title}
                                         </p>
                                     </a>
-                                    <a href="#" className="ml-2">
+                                    <Link href="#" className="ml-2">
                                         <span>
                                             by <Badge>{data.by}</Badge>
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div>
-                                    <a href={`/discussion/${data.id}`}>
+                                    <Link href={`/discussion/${data.id}`}>
                                         <span className="text-slate-900 dark:text-slate-400">
                                             {data.descendants} comments
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <Separator className="my-4 h-1" />
                             </div>
