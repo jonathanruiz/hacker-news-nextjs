@@ -30,15 +30,19 @@ const IndexPage = async () => {
                 {stories.map((story: any) => (
                     <div key={story}>
                         {getStory(story).then((data) => (
-                            <div className="flex flex-col gap-2">
-                                <a href={data.url}>
-                                    <p className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
-                                        {data.title}
-                                    </p>
-                                </a>
-                                <span className="font-slate-100">
-                                    by <Badge>{data.by}</Badge>
-                                </span>
+                            <div>
+                                <div className="flex items-center">
+                                    <a href={data.url}>
+                                        <p className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                            {data.title}
+                                        </p>
+                                    </a>
+                                    <div className="ml-2">
+                                        <span className="font-slate-100">
+                                            by <Badge>{data.by}</Badge>
+                                        </span>
+                                    </div>
+                                </div>
                                 <Separator className="my-4 h-1" />
                             </div>
                         ))}
