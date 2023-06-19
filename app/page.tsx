@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getStories, getStory } from "@/utils/hackernews"
+import { getStories, getStory } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"

@@ -1,4 +1,4 @@
-import { getStory } from "@/utils/hackernews"
+import { getStory } from "@/utils/hackerNews"
 
 const DiscussionPage = async ({ params }: any) => {
     const story = await getStory(params.id).then((data) => data)
