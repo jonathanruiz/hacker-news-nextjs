@@ -20,9 +20,9 @@ const IndexPage = async () => {
                             <div>
                                 <div className="flex items-center">
                                     <a href={data.url}>
-                                        <p className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
                                             {data.title}
-                                        </p>
+                                        </h2>
                                     </a>
                                     <Link href="#" className="ml-2">
                                         <span>

@@ -11,9 +11,9 @@ const DiscussionPage = async ({ params }: any) => {
             <div className="flex max-w-[980px] flex-col items-start gap-2">
                 <div className="flex items-center">
                     <a href={story.url}>
-                        <p className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
                             {story.title}
-                        </p>
+                        </h2>
                     </a>
                     <Link href="#" className="ml-2">
                         <span>
