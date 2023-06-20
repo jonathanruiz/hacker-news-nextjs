@@ -6,7 +6,7 @@ export const getStories = async () => {
     return data
 }
 
-export const getStory = async (id: number) => {
+export const getItem = async (id: number) => {
     const res = await fetch(
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`
     )

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getStories, getStory } from "@/utils/hackerNews"
+import { getItem, getStories } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -16,7 +16,7 @@ const IndexPage = async () => {
                 </h1>
                 {stories.map((story: any) => (
                     <div key={story}>
-                        {getStory(story).then((data) => (
+                        {getItem(story).then((data) => (
                             <div>
                                 <div className="flex items-center">
                                     <a href={data.url}>

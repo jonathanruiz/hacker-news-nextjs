@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { getStory } from "@/utils/hackerNews"
+import { getItem } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 
 const DiscussionPage = async ({ params }: any) => {
-    const story = await getStory(params.id).then((data) => data)
+    const story = await getItem(params.id).then((data) => data)
 
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -33,7 +33,7 @@ const DiscussionPage = async ({ params }: any) => {
             <div>
                 {story.kids.map((kid: any) => (
                     <div key={kid}>
-                        {getStory(kid).then((data) => (
+                        {getItem(kid).then((data) => (
                             <div>
                                 <div className="flex items-center">
                                     <div>
