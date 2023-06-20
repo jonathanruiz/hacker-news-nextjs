@@ -3,6 +3,29 @@ import { getItem } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 
+// Depth was added as a parameter to displayAllComments to keep track of the depth of the comment. It is currently not doing something important, but I left it available in case you want to use it.
+const displayAllComments = (kids: any[], depth: number = 0) => {
+    return kids.map((kid: any) => (
+        <div key={kid} className={`ml-5`}>
+            {getItem(kid).then((data) => (
+                <div>
+                    <div className="flex items-center">
+                        <div>
+                            <Link href="#">
+                                <Badge>{data.by}</Badge>
+                            </Link>
+                        </div>
+                    </div>
+                    <div>
+                        <span>{data.text}</span>
+                    </div>
+                    {data.kids && displayAllComments(data.kids, depth + 1)}
+                </div>
+            ))}
+        </div>
+    ))
+}
+
 const DiscussionPage = async ({ params }: any) => {
     const item = await getItem(params.id).then((data) => data)
 
@@ -30,29 +53,8 @@ const DiscussionPage = async ({ params }: any) => {
                     </Link>
                 </div>
                 <div>
-                    {item.kids.map((kid: any) => (
-                        <div key={kid}>
-                            {getItem(kid).then((data) => (
-                                <div>
-                                    <div className="flex items-center">
-                                        <div>
-                                            <Link href="#">
-                                                <Badge>{data.by}</Badge>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span
-                                            dangerouslySetInnerHTML={{
-                                                __html: data.text,
-                                            }}
-                                            className="text-slate-900 dark:text-slate-400"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ))}
+                    <h3>Comments</h3>
+                    {displayAllComments(item.kids)}
                 </div>
             </div>
         </section>
