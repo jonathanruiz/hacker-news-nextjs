@@ -17,7 +17,9 @@ const displayAllComments = (kids: any[], depth: number = 0) => {
                         </div>
                     </div>
                     <div>
-                        <span>{data.text}</span>
+                        <span className="text-base md:text-sm">
+                            {data.text}
+                        </span>
                     </div>
                     {data.kids && displayAllComments(data.kids, depth + 1)}
                 </div>
@@ -34,7 +36,7 @@ const DiscussionPage = async ({ params }: any) => {
             <div className="flex max-w-[980px] flex-col items-start gap-2">
                 <div className="flex items-center">
                     <a href={item.url}>
-                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                        <h2 className="text-2xl font-bold leading-tight tracking-tighter">
                             {item.title}
                         </h2>
                     </a>
@@ -53,7 +55,7 @@ const DiscussionPage = async ({ params }: any) => {
                     </Link>
                 </div>
                 <div>
-                    <h3>Comments</h3>
+                    <h3 className="text-xl">Comments</h3>
                     {displayAllComments(item.kids)}
                 </div>
             </div>
