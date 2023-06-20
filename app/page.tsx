@@ -24,11 +24,12 @@ const IndexPage = async () => {
                                             {data.title}
                                         </h2>
                                     </a>
-                                    <Link href="#" className="ml-2">
-                                        <span>
-                                            by <Badge>{data.by}</Badge>
-                                        </span>
-                                    </Link>
+                                    <div className="ml-2">
+                                        <span>by </span>
+                                        <Link href="#">
+                                            <Badge>{data.by}</Badge>
+                                        </Link>
+                                    </div>
                                 </div>
                                 <div>
                                     <Link href={`/discussion/${data.id}`}>

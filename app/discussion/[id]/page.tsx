@@ -15,11 +15,12 @@ const DiscussionPage = async ({ params }: any) => {
                             {story.title}
                         </h2>
                     </a>
-                    <Link href="#" className="ml-2">
-                        <span>
-                            by <Badge>{story.by}</Badge>
-                        </span>
-                    </Link>
+                    <div className="ml-2">
+                        <span>by </span>
+                        <Link href="#">
+                            <Badge>{story.by}</Badge>
+                        </Link>
+                    </div>
                 </div>
                 <div>
                     <Link href={`/discussion/${story.id}`}>
@@ -28,6 +29,31 @@ const DiscussionPage = async ({ params }: any) => {
                         </span>
                     </Link>
                 </div>
+            </div>
+            <div>
+                {story.kids.map((kid: any) => (
+                    <div key={kid}>
+                        {getStory(kid).then((data) => (
+                            <div>
+                                <div className="flex items-center">
+                                    <div>
+                                        <Link href="#">
+                                            <Badge>{data.by}</Badge>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: data.text,
+                                        }}
+                                        className="text-slate-900 dark:text-slate-400"
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ))}
             </div>
         </section>
     )
