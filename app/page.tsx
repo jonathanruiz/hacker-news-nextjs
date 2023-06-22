@@ -26,7 +26,7 @@ const IndexPage = async () => {
                                     </a>
                                     <div className="ml-2">
                                         <span>by </span>
-                                        <Link href="#">
+                                        <Link href={`/user/${data.by}`}>
                                             <Badge>{data.by}</Badge>
                                         </Link>
                                     </div>
