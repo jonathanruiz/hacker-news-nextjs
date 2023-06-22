@@ -14,10 +14,14 @@ const UserPage = async ({ params }: any) => {
                     </h2>
                 </div>
                 <div>
-                    <p>Created: {item.created}</p>
-                    <p>
-                        Karma: <Badge>{item.karma}</Badge>
-                    </p>
+                    <span>Created: {item.created}</span>
+                </div>
+                <div>
+                    <span>Karma: </span>
+                    <Badge>{item.karma}</Badge>
+                </div>
+                <div>
+                    <span>{item.about}</span>
                 </div>
             </div>
         </section>
