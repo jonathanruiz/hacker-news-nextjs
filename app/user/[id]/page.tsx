@@ -1,5 +1,6 @@
 import { getUser } from "@/utils/hackerNews"
 
+import { convertUnixToDate } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
@@ -25,7 +26,7 @@ const UserPage = async ({ params }: any) => {
                         <Icons.chevronUp></Icons.chevronUp>
                         <Badge>{user.karma}</Badge>
                     </div>
-                    <span>Created {user.created}</span>
+                    <span>Created {convertUnixToDate(user.created)}</span>
                 </CardFooter>
             </Card>
         </section>
