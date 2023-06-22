@@ -3,7 +3,8 @@ import { getItem } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 
-// Depth was added as a parameter to displayAllComments to keep track of the depth of the comment. It is currently not doing something important, but I left it available in case you want to use it.
+// Depth was added as a parameter to displayAllComments to keep track of the depth of the comment.
+// It is currently not doing something important, but I left it available in case you want to use it.
 const displayAllComments = (kids: any[], depth: number = 0) => {
     return kids.map((kid: any) => (
         <div key={kid} className={`ml-5`}>
@@ -11,7 +12,7 @@ const displayAllComments = (kids: any[], depth: number = 0) => {
                 <div>
                     <div className="flex items-center">
                         <div>
-                            <Link href="#">
+                            <Link href={`/user/${data.by}`}>
                                 <Badge>{data.by}</Badge>
                             </Link>
                         </div>
@@ -42,7 +43,7 @@ const DiscussionPage = async ({ params }: any) => {
                     </a>
                     <div className="ml-2">
                         <span>by </span>
-                        <Link href="#">
+                        <Link href={`/user/${item.by}`}>
                             <Badge>{item.by}</Badge>
                         </Link>
                     </div>
