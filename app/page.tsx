@@ -3,6 +3,7 @@ import { getItem, getStories } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { Icons } from "@/components/icons"
 
 const IndexPage = async () => {
     const stories = await getStories()
@@ -19,6 +20,10 @@ const IndexPage = async () => {
                         {getItem(story).then((data) => (
                             <div>
                                 <div className="flex items-center">
+                                    <div className="mr-2 flex">
+                                        <Icons.chevronUp />
+                                        <Badge>{data.score}</Badge>
+                                    </div>
                                     <a href={data.url}>
                                         <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
                                             {data.title}
