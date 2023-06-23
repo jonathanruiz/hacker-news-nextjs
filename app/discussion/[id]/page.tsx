@@ -2,6 +2,7 @@ import Link from "next/link"
 import { getItem } from "@/utils/hackerNews"
 
 import { Badge } from "@/components/ui/badge"
+import { Icons } from "@/components/icons"
 
 // Depth was added as a parameter to displayAllComments to keep track of the depth of the comment.
 // It is currently not doing something important, but I left it available in case you want to use it.
@@ -36,6 +37,10 @@ const DiscussionPage = async ({ params }: any) => {
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
             <div className="flex max-w-[980px] flex-col items-start gap-2">
                 <div className="flex items-center">
+                    <div className="mr-2 flex">
+                        <Icons.chevronUp />
+                        <Badge>{item.score}</Badge>
+                    </div>
                     <a href={item.url}>
                         <h2 className="text-2xl font-bold leading-tight tracking-tighter">
                             {item.title}
@@ -49,14 +54,7 @@ const DiscussionPage = async ({ params }: any) => {
                     </div>
                 </div>
                 <div>
-                    <Link href={`/discussion/${item.id}`}>
-                        <span className="text-slate-900 dark:text-slate-400">
-                            {item.descendants} comments
-                        </span>
-                    </Link>
-                </div>
-                <div>
-                    <h3 className="text-xl">Comments</h3>
+                    <h3 className="text-xl">Comments ({item.descendants})</h3>
                     {displayAllComments(item.kids)}
                 </div>
             </div>
