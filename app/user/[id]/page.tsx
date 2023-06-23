@@ -23,7 +23,7 @@ const UserPage = async ({ params }: any) => {
                 </CardHeader>
                 <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
                     <div className="flex">
-                        <Icons.chevronUp></Icons.chevronUp>
+                        <Icons.chevronUp />
                         <Badge>{user.karma}</Badge>
                     </div>
                     <span>Created {convertUnixToDate(user.created)}</span>
