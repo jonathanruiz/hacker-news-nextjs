@@ -1,6 +1,6 @@
 import Link from "next/link"
-import { getItem } from "@/utils/hackerNews"
 
+import { getItem } from "@/lib/hackerNews"
 import { Badge } from "@/components/ui/badge"
 import { Icons } from "@/components/icons"
 
