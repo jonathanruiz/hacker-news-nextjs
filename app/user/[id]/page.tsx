@@ -1,5 +1,4 @@
-import { getUser } from "@/utils/hackerNews"
-
+import { getUser } from "@/lib/hackerNews"
 import { convertUnixToDate } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
