@@ -14,7 +14,7 @@ export const convertUnixToDate = (unix: number) => {
     })
 }
 
-export const displayTimePast = (timestamp: number): string => {
+export const displayRelativeTime = (timestamp: number): string => {
     const currentTime = Math.floor(Date.now() / 1000) // Convert current time to seconds
     const timeDifference = currentTime - timestamp
 

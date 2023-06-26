@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { getItem, getStories } from "@/lib/hackerNews"
-import { displayTimePast } from "@/lib/utils"
+import { displayRelativeTime } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
@@ -44,7 +44,7 @@ const IndexPage = async () => {
                                         </span>
                                     </Link>
                                     <span className="ml-5">
-                                        {displayTimePast(data.time)}
+                                        {displayRelativeTime(data.time)}
                                     </span>
                                 </div>
 
