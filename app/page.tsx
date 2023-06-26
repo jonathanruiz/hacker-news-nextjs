@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { getItem, getStories } from "@/utils/hackerNews"
 
+import { displayTimePast } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
@@ -42,7 +43,11 @@ const IndexPage = async () => {
                                             {data.descendants} comments
                                         </span>
                                     </Link>
+                                    <span className="ml-5">
+                                        {displayTimePast(data.time)}
+                                    </span>
                                 </div>
+
                                 <Separator className="my-4 h-1" />
                             </div>
                         ))}
