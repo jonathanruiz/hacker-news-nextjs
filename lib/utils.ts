@@ -31,3 +31,8 @@ export const displayRelativeTime = (timestamp: number): string => {
         return `${days} ${days === 1 ? "day" : "days"} ago`
     }
 }
+
+export const getUrlHostname = (url: string) => {
+    const { hostname } = new URL(url)
+    return hostname
+}
