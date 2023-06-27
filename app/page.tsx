@@ -21,6 +21,9 @@ const IndexPage = async () => {
                         {getItem(story).then((data) => (
                             <div>
                                 <div className="flex items-center">
+                                    <span className="mr-2 text-slate-400">
+                                        {stories.indexOf(story) + 1}.
+                                    </span>
                                     <div className="mr-2 flex">
                                         <Icons.chevronUp />
                                         <Badge>{data.score}</Badge>
