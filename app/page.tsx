@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { getItem, getStories } from "@/lib/hackerNews"
-import { displayRelativeTime } from "@/lib/utils"
+import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
@@ -30,6 +30,9 @@ const IndexPage = async () => {
                                             {data.title}
                                         </h2>
                                     </a>
+                                    <span className="ml-2 text-slate-400">
+                                        ({getUrlHostname(data.url)})
+                                    </span>
                                     <div className="ml-2">
                                         <span>by </span>
                                         <Link href={`/user/${data.by}`}>
