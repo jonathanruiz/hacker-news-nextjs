@@ -36,32 +36,33 @@ const DiscussionPage = async ({ params }: any) => {
 
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-            <div className="flex max-w-[980px] flex-col items-start gap-2">
+            <div className="flex max-w-[980px] flex-col gap-2">
                 <div className="flex items-center">
                     <span className="mr-2 flex">
                         <Icons.chevronUp />
                         <Badge>{item.score}</Badge>
                     </span>
-                    <span>
+                    <div>
                         <a href={item.url}>
-                            <h2 className="text-2xl font-bold leading-tight tracking-tighter">
+                            <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
                                 {item.title}
                             </h2>
+                            <span className="ml-2 inline-block text-slate-400">
+                                ({getUrlHostname(item.url)})
+                            </span>
                         </a>
-                    </span>
-                    <span className="ml-2 text-slate-400">
-                        ({getUrlHostname(item.url)})
-                    </span>
-                    <div className="ml-2">
-                        <span>by </span>
-                        <Link href={`/user/${item.by}`}>
-                            <Badge>{item.by}</Badge>
-                        </Link>
                     </div>
                 </div>
                 <div>
                     <span>{displayRelativeTime(item.time)}</span>
+                    <span className="ml-2">
+                        by{" "}
+                        <Link href={`/user/${item.by}`}>
+                            <Badge>{item.by}</Badge>
+                        </Link>
+                    </span>
                 </div>
+
                 <div>
                     <h3 className="text-xl">Comments ({item.descendants})</h3>
                     {displayAllComments(item.kids)}

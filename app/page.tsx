@@ -12,8 +12,8 @@ const IndexPage = async () => {
 
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-            <div className="flex max-w-[980px] flex-col items-start gap-2">
-                <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            <div className="flex max-w-[980px] flex-col gap-2">
+                <h1 className="font-extrabold leading-tight tracking-tighter sm:text-xl md:text-2xl lg:text-3xl">
                     Hacker News Clone with Next.js 13
                 </h1>
                 {stories.map((story: any) => (
@@ -28,22 +28,16 @@ const IndexPage = async () => {
                                         <Icons.chevronUp />
                                         <Badge>{data.score}</Badge>
                                     </span>
-                                    <span>
+                                    <div>
                                         <a href={data.url}>
-                                            <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                            <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
                                                 {data.title}
                                             </h2>
+                                            <span className="ml-2 inline-block text-slate-400">
+                                                ({getUrlHostname(data.url)})
+                                            </span>
                                         </a>
-                                    </span>
-                                    <span className="ml-2 text-slate-400">
-                                        ({getUrlHostname(data.url)})
-                                    </span>
-                                    <span className="ml-2">
-                                        by{" "}
-                                        <Link href={`/user/${data.by}`}>
-                                            <Badge>{data.by}</Badge>
-                                        </Link>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div>
                                     <Link href={`/discussion/${data.id}`}>
@@ -53,6 +47,12 @@ const IndexPage = async () => {
                                     </Link>
                                     <span className="ml-5">
                                         {displayRelativeTime(data.time)}
+                                    </span>
+                                    <span className="ml-2">
+                                        by{" "}
+                                        <Link href={`/user/${data.by}`}>
+                                            <Badge>{data.by}</Badge>
+                                        </Link>
                                     </span>
                                 </div>
 
