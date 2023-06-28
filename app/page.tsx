@@ -17,7 +17,7 @@ const IndexPage = async () => {
                     Hacker News Clone with Next.js 13
                 </h1>
                 {stories.map((story: any) => (
-                    <div key={story}>
+                    <div key={story} className="w-full">
                         {getItem(story).then((data) => (
                             <div>
                                 <div className="flex items-center">
