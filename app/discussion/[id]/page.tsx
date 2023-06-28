@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { getItem } from "@/lib/hackerNews"
+import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Icons } from "@/components/icons"
 
@@ -37,21 +38,29 @@ const DiscussionPage = async ({ params }: any) => {
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
             <div className="flex max-w-[980px] flex-col items-start gap-2">
                 <div className="flex items-center">
-                    <div className="mr-2 flex">
+                    <span className="mr-2 flex">
                         <Icons.chevronUp />
                         <Badge>{item.score}</Badge>
-                    </div>
-                    <a href={item.url}>
-                        <h2 className="text-2xl font-bold leading-tight tracking-tighter">
-                            {item.title}
-                        </h2>
-                    </a>
+                    </span>
+                    <span>
+                        <a href={item.url}>
+                            <h2 className="text-2xl font-bold leading-tight tracking-tighter">
+                                {item.title}
+                            </h2>
+                        </a>
+                    </span>
+                    <span className="ml-2 text-slate-400">
+                        ({getUrlHostname(item.url)})
+                    </span>
                     <div className="ml-2">
                         <span>by </span>
                         <Link href={`/user/${item.by}`}>
                             <Badge>{item.by}</Badge>
                         </Link>
                     </div>
+                </div>
+                <div>
+                    <span>{displayRelativeTime(item.time)}</span>
                 </div>
                 <div>
                     <h3 className="text-xl">Comments ({item.descendants})</h3>
