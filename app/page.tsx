@@ -24,24 +24,26 @@ const IndexPage = async () => {
                                     <span className="mr-2 text-slate-400">
                                         {stories.indexOf(story) + 1}.
                                     </span>
-                                    <div className="mr-2 flex">
+                                    <span className="mr-2 flex">
                                         <Icons.chevronUp />
                                         <Badge>{data.score}</Badge>
-                                    </div>
-                                    <a href={data.url}>
-                                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
-                                            {data.title}
-                                        </h2>
-                                    </a>
+                                    </span>
+                                    <span>
+                                        <a href={data.url}>
+                                            <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                                {data.title}
+                                            </h2>
+                                        </a>
+                                    </span>
                                     <span className="ml-2 text-slate-400">
                                         ({getUrlHostname(data.url)})
                                     </span>
-                                    <div className="ml-2">
-                                        <span>by </span>
+                                    <span className="ml-2">
+                                        by{" "}
                                         <Link href={`/user/${data.by}`}>
                                             <Badge>{data.by}</Badge>
                                         </Link>
-                                    </div>
+                                    </span>
                                 </div>
                                 <div>
                                     <Link href={`/discussion/${data.id}`}>
