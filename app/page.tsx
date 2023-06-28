@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { getItem, getStories } from "@/lib/hackerNews"
-import { displayRelativeTime } from "@/lib/utils"
+import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/icons"
@@ -17,25 +17,33 @@ const IndexPage = async () => {
                     Hacker News Clone with Next.js 13
                 </h1>
                 {stories.map((story: any) => (
-                    <div key={story}>
+                    <div key={story} className="w-full">
                         {getItem(story).then((data) => (
                             <div>
                                 <div className="flex items-center">
-                                    <div className="mr-2 flex">
+                                    <span className="mr-2 text-slate-400">
+                                        {stories.indexOf(story) + 1}.
+                                    </span>
+                                    <span className="mr-2 flex">
                                         <Icons.chevronUp />
                                         <Badge>{data.score}</Badge>
-                                    </div>
-                                    <a href={data.url}>
-                                        <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
-                                            {data.title}
-                                        </h2>
-                                    </a>
-                                    <div className="ml-2">
-                                        <span>by </span>
+                                    </span>
+                                    <span>
+                                        <a href={data.url}>
+                                            <h2 className="text-lg font-bold leading-tight tracking-tighter md:text-xl">
+                                                {data.title}
+                                            </h2>
+                                        </a>
+                                    </span>
+                                    <span className="ml-2 text-slate-400">
+                                        ({getUrlHostname(data.url)})
+                                    </span>
+                                    <span className="ml-2">
+                                        by{" "}
                                         <Link href={`/user/${data.by}`}>
                                             <Badge>{data.by}</Badge>
                                         </Link>
-                                    </div>
+                                    </span>
                                 </div>
                                 <div>
                                     <Link href={`/discussion/${data.id}`}>
