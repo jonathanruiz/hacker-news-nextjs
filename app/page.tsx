@@ -29,14 +29,32 @@ const IndexPage = async () => {
                                         <Badge>{data.score}</Badge>
                                     </span>
                                     <div>
-                                        <a href={data.url}>
-                                            <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
-                                                {data.title}
-                                            </h2>
-                                            <span className="ml-2 inline-block text-slate-400">
-                                                ({getUrlHostname(data.url)})
-                                            </span>
-                                        </a>
+                                        {
+                                            // Check if there is a url. If so, make it a link. If not,
+                                            // just display the title with a link to the discussion.
+                                            data.url ? (
+                                                <a href={data.url}>
+                                                    <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                                        {data.title}
+                                                    </h2>
+                                                    <span className="ml-2 inline-block text-slate-400">
+                                                        (
+                                                        {getUrlHostname(
+                                                            data.url
+                                                        )}
+                                                        )
+                                                    </span>
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    href={`/discussion/${data.id}`}
+                                                >
+                                                    <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                                        {data.title}
+                                                    </h2>
+                                                </Link>
+                                            )
+                                        }
                                     </div>
                                 </div>
                                 <div>
