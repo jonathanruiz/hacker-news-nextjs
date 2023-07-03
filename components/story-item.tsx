@@ -3,35 +3,36 @@ import Link from "next/link"
 import { getItem } from "@/lib/hackerNews"
 import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
 import { Icons } from "@/components/icons"
+
+import { Separator } from "./ui/separator"
 
 export const StoryItem = ({ story, stories }: any) => {
     return (
         <div key={story} className="w-full">
             {getItem(story).then((data) => (
-                <Card>
+                <Card className="flex">
                     <CardHeader>
-                        <CardTitle className="text-2xl">
-                            <div className="flex items-center">
-                                <span className="mr-2 text-slate-400">
-                                    {stories.indexOf(story) + 1}.
-                                </span>
-                                <span className="mr-2 flex">
-                                    <Icons.chevronUp />
-                                    <Badge>{data.score}</Badge>
-                                </span>
-                                <div>
-                                    <a href={data.url}>
-                                        <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
-                                            {data.title}
-                                        </h2>
-                                    </a>
-                                </div>
-                            </div>
+                        <CardTitle className="grid justify-items-center">
+                            <Icons.chevronUp />
+                            <span>{data.score}</span>
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
+                        <div className="text-2xl">
+                            <a href={data.url}>
+                                <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                    {data.title}
+                                </h2>
+                            </a>
+                        </div>
                         <div>
                             <span>
                                 by{" "}
