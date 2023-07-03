@@ -8,7 +8,7 @@ const Loading = () => {
                     Hacker News Clone with Next.js 13
                 </h1>
                 <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-                    {Array.from(Array(20).keys()).map((_, index) => (
+                    {Array.from(Array(10).keys()).map((_, index) => (
                         <ItemSkeleton key={index} />
                     ))}
                 </section>
