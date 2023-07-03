@@ -8,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Icons } from "@/components/icons"
 
 const UserPage = async ({ params }: any) => {
@@ -36,6 +37,14 @@ const UserPage = async ({ params }: any) => {
                     <span>Created {convertUnixToDate(user.created)}</span>
                 </CardFooter>
             </Card>
+            <Tabs defaultValue="submissions" className="w-[400px]">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="submissions">Submissions</TabsTrigger>
+                    <TabsTrigger value="comments">Comments</TabsTrigger>
+                </TabsList>
+                <TabsContent value="submissions">This is a post</TabsContent>
+                <TabsContent value="comments">This is a comment</TabsContent>
+            </Tabs>
         </section>
     )
 }
