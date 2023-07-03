@@ -1,6 +1,7 @@
 import {
     ChevronUp,
     LucideProps,
+    MessageSquare,
     Moon,
     SunMedium,
     type Icon as LucideIcon,
@@ -12,6 +13,7 @@ export const Icons = {
     sun: SunMedium,
     moon: Moon,
     chevronUp: ChevronUp,
+    messageSquare: MessageSquare,
     gitHub: (props: LucideProps) => (
         <svg viewBox="0 0 438.549 438.549" {...props}>
             <path

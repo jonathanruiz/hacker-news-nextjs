@@ -46,7 +46,7 @@ export const StoryItem = ({ story, stories }: any) => {
                                 </h2>
                             </a>
                         </div>
-                        <div>
+                        <div className="flex">
                             <span>
                                 by{" "}
                                 <Link href={`/user/${data.by}`}>
@@ -57,11 +57,12 @@ export const StoryItem = ({ story, stories }: any) => {
                                 {displayRelativeTime(data.time)}
                             </span>
                             <Link
-                                className="ml-5"
+                                className="ml-5 flex items-center"
                                 href={`/discussion/${data.id}`}
                             >
-                                <span className="text-slate-900 dark:text-slate-400">
-                                    {data.descendants} comments
+                                <Icons.messageSquare />
+                                <span className="ml-2 text-slate-900 dark:text-slate-400 ">
+                                    {data.descendants}
                                 </span>
                             </Link>
                         </div>
