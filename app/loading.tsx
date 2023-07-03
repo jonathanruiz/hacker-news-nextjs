@@ -1,10 +1,6 @@
-import { getStories } from "@/lib/hackerNews"
-import { StoryItem } from "@/components/story-item"
+import { ItemSkeleton } from "@/components/item-skeleton"
 
-const IndexPage = async () => {
-    const stories = await getStories()
-    stories.length = 20 // limit stories to 20
-
+const Loading = () => {
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
             <div className="flex max-w-[980px] flex-col gap-2">
@@ -12,12 +8,8 @@ const IndexPage = async () => {
                     Hacker News Clone with Next.js 13
                 </h1>
                 <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-                    {stories.map((story: any) => (
-                        <StoryItem
-                            key={story.id}
-                            story={story}
-                            stories={stories}
-                        />
+                    {Array.from(Array(10).keys()).map((_, index) => (
+                        <ItemSkeleton key={index} />
                     ))}
                 </section>
             </div>
@@ -25,4 +17,4 @@ const IndexPage = async () => {
     )
 }
 
-export default IndexPage
+export default Loading

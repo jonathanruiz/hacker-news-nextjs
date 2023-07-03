@@ -3,16 +3,8 @@ import Link from "next/link"
 import { getItem } from "@/lib/hackerNews"
 import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
-
-import { Separator } from "./ui/separator"
 
 export const StoryItem = ({ story, stories }: any) => {
     return (
