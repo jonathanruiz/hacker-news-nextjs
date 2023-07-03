@@ -11,9 +11,15 @@ const IndexPage = async () => {
                 <h1 className="font-extrabold leading-tight tracking-tighter sm:text-xl md:text-2xl lg:text-3xl">
                     Hacker News Clone with Next.js 13
                 </h1>
-                {stories.map((story: any) => (
-                    <StoryItem key={story.id} story={story} stories={stories} />
-                ))}
+                <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+                    {stories.map((story: any) => (
+                        <StoryItem
+                            key={story.id}
+                            story={story}
+                            stories={stories}
+                        />
+                    ))}
+                </section>
             </div>
         </section>
     )
