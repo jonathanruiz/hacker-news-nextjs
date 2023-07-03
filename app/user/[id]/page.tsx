@@ -1,4 +1,4 @@
-import { getUser } from "@/lib/hackerNews"
+import { getItem, getUser } from "@/lib/hackerNews"
 import { convertUnixToDate } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -42,8 +42,24 @@ const UserPage = async ({ params }: any) => {
                     <TabsTrigger value="submissions">Submissions</TabsTrigger>
                     <TabsTrigger value="comments">Comments</TabsTrigger>
                 </TabsList>
-                <TabsContent value="submissions">This is a post</TabsContent>
-                <TabsContent value="comments">This is a comment</TabsContent>
+                <TabsContent value="submissions">
+                    {user.submitted.map((submission: any) =>
+                        getItem(submission).then((data) =>
+                            data.type === "story" ? (
+                                <div>{data.title}</div>
+                            ) : null
+                        )
+                    )}
+                </TabsContent>
+                <TabsContent value="comments">
+                    {user.submitted.map((submission: any) =>
+                        getItem(submission).then((data) =>
+                            data.type === "comment" ? (
+                                <div>{data.text}</div>
+                            ) : null
+                        )
+                    )}
+                </TabsContent>
             </Tabs>
         </section>
     )
