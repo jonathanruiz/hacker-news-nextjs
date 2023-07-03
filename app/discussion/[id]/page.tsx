@@ -3,6 +3,7 @@ import Link from "next/link"
 import { getItem } from "@/lib/hackerNews"
 import { displayRelativeTime, getUrlHostname } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
 
 // Depth was added as a parameter to displayAllComments to keep track of the depth of the comment.
@@ -37,31 +38,43 @@ const DiscussionPage = async ({ params }: any) => {
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
             <div className="flex max-w-[980px] flex-col gap-2">
-                <div className="flex items-center">
-                    <span className="mr-2 flex">
-                        <Icons.chevronUp />
-                        <Badge>{item.score}</Badge>
-                    </span>
-                    <div>
-                        <a href={item.url}>
-                            <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
-                                {item.title}
-                            </h2>
-                            <span className="ml-2 inline-block text-slate-400">
-                                ({getUrlHostname(item.url)})
+                <Card className="flex">
+                    <CardHeader>
+                        <CardTitle className="grid justify-items-center">
+                            <Icons.chevronUp />
+                            <span>{item.score}</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div>
+                            {item.url ? (
+                                <a href={item.url}>
+                                    <span className="inline-block text-slate-400">
+                                        {getUrlHostname(item.url)}
+                                    </span>
+                                </a>
+                            ) : null}
+                        </div>
+                        <div className="text-2xl">
+                            <a href={item.url}>
+                                <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                    {item.title}
+                                </h2>
+                            </a>
+                        </div>
+                        <div className="flex">
+                            <span>
+                                by{" "}
+                                <Link href={`/user/${item.by}`}>
+                                    <Badge>{item.by}</Badge>
+                                </Link>
                             </span>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <span>{displayRelativeTime(item.time)}</span>
-                    <span className="ml-2">
-                        by{" "}
-                        <Link href={`/user/${item.by}`}>
-                            <Badge>{item.by}</Badge>
-                        </Link>
-                    </span>
-                </div>
+                            <span className="ml-5">
+                                {displayRelativeTime(item.time)}
+                            </span>
+                        </div>
+                    </CardContent>
+                </Card>
 
                 <div>
                     <h3 className="text-xl">Comments ({item.descendants})</h3>
