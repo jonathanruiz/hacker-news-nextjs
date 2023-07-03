@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { getItem, getUser } from "@/lib/hackerNews"
 import { convertUnixToDate } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -37,7 +39,7 @@ const UserPage = async ({ params }: any) => {
                     <span>Created {convertUnixToDate(user.created)}</span>
                 </CardFooter>
             </Card>
-            <Tabs defaultValue="submissions" className="w-[400px]">
+            <Tabs defaultValue="submissions" className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="submissions">Submissions</TabsTrigger>
                     <TabsTrigger value="comments">Comments</TabsTrigger>
@@ -46,7 +48,31 @@ const UserPage = async ({ params }: any) => {
                     {user.submitted.map((submission: any) =>
                         getItem(submission).then((data) =>
                             data.type === "story" ? (
-                                <div>{data.title}</div>
+                                <Card className="my-4">
+                                    <CardHeader>
+                                        <CardTitle className="text-2xl">
+                                            <a href={data.url}>{data.title}</a>
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
+                                        <div className="flex">
+                                            <Icons.chevronUp />
+                                            <Badge>{data.score}</Badge>
+                                        </div>
+                                        <span>
+                                            {convertUnixToDate(data.time)}
+                                        </span>
+                                        <Link
+                                            className="ml-5 flex items-center"
+                                            href={`/discussion/${data.id}`}
+                                        >
+                                            <Icons.messageSquare />
+                                            <span className="ml-2 text-slate-900 dark:text-slate-400 ">
+                                                {data.descendants}
+                                            </span>
+                                        </Link>
+                                    </CardFooter>
+                                </Card>
                             ) : null
                         )
                     )}
