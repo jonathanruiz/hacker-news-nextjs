@@ -1,5 +1,5 @@
 import { getStories } from "@/lib/hackerNews"
-import StoryItem from "@/components/story-item"
+import { NewStoryItem, StoryItem } from "@/components/story-item"
 
 const IndexPage = async () => {
     const stories = await getStories()
@@ -12,7 +12,11 @@ const IndexPage = async () => {
                     Hacker News Clone with Next.js 13
                 </h1>
                 {stories.map((story: any) => (
-                    <StoryItem key={story.id} story={story} stories={stories} />
+                    <NewStoryItem
+                        key={story.id}
+                        story={story}
+                        stories={stories}
+                    />
                 ))}
             </div>
         </section>
