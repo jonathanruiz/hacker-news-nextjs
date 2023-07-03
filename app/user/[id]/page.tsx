@@ -18,7 +18,15 @@ const UserPage = async ({ params }: any) => {
             <Card className="w-1/2">
                 <CardHeader>
                     <CardTitle className="text-2xl">{user.id}</CardTitle>
-                    <CardDescription>{user.about}</CardDescription>
+                    <CardDescription>
+                        {user.about ? (
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: `${user.about}`,
+                                }}
+                            />
+                        ) : null}
+                    </CardDescription>
                 </CardHeader>
                 <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
                     <div className="flex">

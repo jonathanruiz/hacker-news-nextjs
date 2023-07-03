@@ -21,9 +21,11 @@ const displayAllComments = (kids: any[], depth: number = 0) => {
                         </div>
                     </div>
                     <div>
-                        <span className="text-base md:text-sm">
-                            {data.text}
-                        </span>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: `${data.text}`,
+                            }}
+                        />
                     </div>
                     {data.kids && displayAllComments(data.kids, depth + 1)}
                 </div>
