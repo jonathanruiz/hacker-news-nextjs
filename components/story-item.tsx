@@ -26,6 +26,19 @@ export const StoryItem = ({ story, stories }: any) => {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
+                        <div>
+                            {data.url ? (
+                                <a href={data.url}>
+                                    {/* Display ranking number of story */}
+                                    <span className="text-slate-900 dark:text-slate-400">
+                                        {stories.indexOf(story) + 1}.
+                                    </span>
+                                    <span className="ml-5 inline-block text-slate-400">
+                                        {getUrlHostname(data.url)}
+                                    </span>
+                                </a>
+                            ) : null}
+                        </div>
                         <div className="text-2xl">
                             <a href={data.url}>
                                 <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
@@ -43,13 +56,6 @@ export const StoryItem = ({ story, stories }: any) => {
                             <span className="ml-5">
                                 {displayRelativeTime(data.time)}
                             </span>
-                            {data.url ? (
-                                <a href={data.url}>
-                                    <span className="ml-5 inline-block text-slate-400">
-                                        ({getUrlHostname(data.url)})
-                                    </span>
-                                </a>
-                            ) : null}
                             <Link
                                 className="ml-5"
                                 href={`/discussion/${data.id}`}
