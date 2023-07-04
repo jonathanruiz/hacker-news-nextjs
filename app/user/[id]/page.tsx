@@ -16,6 +16,7 @@ import { Icons } from "@/components/icons"
 
 const UserPage = async ({ params }: any) => {
     const user = await getUser(params.id)
+    user.submitted.length = 100 // prevent too long of a list
 
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -90,11 +91,11 @@ const UserPage = async ({ params }: any) => {
                             data.type === "comment" ? (
                                 <Card className="my-4">
                                     <CardHeader>
-                                        <CardTitle className="text-2xl">
-                                            {data.by}
-                                        </CardTitle>
-                                        <CardDescription>
-                                            {displayRelativeTime(data.time)}
+                                        <CardDescription className="flex gap-4">
+                                            <div>
+                                                {displayRelativeTime(data.time)}
+                                            </div>
+                                            <div>({data.id})</div>
                                         </CardDescription>
                                     </CardHeader>
                                     <CardFooter className="flex space-x-4 text-sm">
