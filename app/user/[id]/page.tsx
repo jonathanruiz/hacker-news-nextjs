@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { getItem, getUser } from "@/lib/hackerNews"
-import { convertUnixToDate } from "@/lib/utils"
+import { displayRelativeTime } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
@@ -36,7 +36,7 @@ const UserPage = async ({ params }: any) => {
                         <Icons.chevronUp />
                         <Badge>{user.karma}</Badge>
                     </div>
-                    <span>Created {convertUnixToDate(user.created)}</span>
+                    <span>Created {displayRelativeTime(user.created)}</span>
                 </CardFooter>
             </Card>
             <Tabs defaultValue="submissions" className="w-full">
@@ -60,7 +60,7 @@ const UserPage = async ({ params }: any) => {
                                             <Badge>{data.score}</Badge>
                                         </div>
                                         <span>
-                                            {convertUnixToDate(data.time)}
+                                            {displayRelativeTime(data.time)}
                                         </span>
                                         <Link
                                             className="ml-5 flex items-center"
@@ -81,7 +81,23 @@ const UserPage = async ({ params }: any) => {
                     {user.submitted.map((submission: any) =>
                         getItem(submission).then((data) =>
                             data.type === "comment" ? (
-                                <div>{data.text}</div>
+                                <Card className="my-4">
+                                    <CardHeader>
+                                        <CardTitle className="text-2xl">
+                                            {data.by}
+                                        </CardTitle>
+                                        <CardDescription>
+                                            {displayRelativeTime(data.time)}
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: `${data.text}`,
+                                            }}
+                                        />
+                                    </CardFooter>
+                                </Card>
                             ) : null
                         )
                     )}
