@@ -15,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Icons } from "@/components/icons"
 
 const UserPage = async ({ params }: any) => {
-    const user = await getUser(params.id).then((data) => data)
+    const user = await getUser(params.id)
 
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -97,7 +97,7 @@ const UserPage = async ({ params }: any) => {
                                             {displayRelativeTime(data.time)}
                                         </CardDescription>
                                     </CardHeader>
-                                    <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
+                                    <CardFooter className="flex space-x-4 text-sm">
                                         <div
                                             dangerouslySetInnerHTML={{
                                                 __html: `${data.text}`,
