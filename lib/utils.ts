@@ -26,9 +26,11 @@ export const displayRelativeTime = (timestamp: number): string => {
     } else if (timeDifference < 86400) {
         const hours = Math.floor(timeDifference / 3600)
         return `${hours} ${hours === 1 ? "hour" : "hours"} ago`
-    } else {
+    } else if (timeDifference < 604800) {
         const days = Math.floor(timeDifference / 86400)
         return `${days} ${days === 1 ? "day" : "days"} ago`
+    } else {
+        return convertUnixToDate(timestamp)
     }
 }
 
