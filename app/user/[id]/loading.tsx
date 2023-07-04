@@ -1,11 +1,13 @@
 import {
     Card,
+    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const Loading = () => {
     return (
@@ -25,6 +27,29 @@ const Loading = () => {
                     <Skeleton className="h-4 w-24" />
                 </CardFooter>
             </Card>
+            <Tabs defaultValue="submissions" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="submissions">Submissions</TabsTrigger>
+                    <TabsTrigger value="comments">Comments</TabsTrigger>
+                </TabsList>
+                <TabsContent value="submissions">
+                    {Array.from(Array(10).keys()).map((_, index) => (
+                        <Card className="my-4 flex items-center">
+                            <CardHeader>
+                                <CardTitle className="grid justify-items-center">
+                                    <Skeleton className="h-12 w-12" />
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <Skeleton className="my-2 h-4 w-20" />
+                                <Skeleton className="my-2 h-4 w-40" />
+                                <Skeleton className="my-2 h-4 w-64" />
+                            </CardContent>
+                        </Card>
+                    ))}
+                </TabsContent>
+                <TabsContent value="comments"></TabsContent>
+            </Tabs>
         </section>
     )
 }
