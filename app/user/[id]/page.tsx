@@ -50,7 +50,10 @@ const UserPage = async ({ params }: any) => {
                     {user.submitted.map((submission: any) =>
                         getItem(submission).then((data) =>
                             data.type === "story" ? (
-                                <Card className="my-4 flex items-center">
+                                <Card
+                                    key={data.id}
+                                    className="my-4 flex items-center"
+                                >
                                     <CardHeader>
                                         <CardTitle className="grid justify-items-center">
                                             <Icons.chevronUp />
@@ -89,7 +92,7 @@ const UserPage = async ({ params }: any) => {
                     {user.submitted.map((submission: any) =>
                         getItem(submission).then((data) =>
                             data.type === "comment" ? (
-                                <Card className="my-4">
+                                <Card key={data.id} className="my-4">
                                     <CardHeader>
                                         <CardDescription className="flex gap-4">
                                             <div>
