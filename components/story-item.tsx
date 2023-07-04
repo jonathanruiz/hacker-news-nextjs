@@ -11,7 +11,7 @@ export const StoryItem = ({ story, stories }: any) => {
     return (
         <div key={story} className="w-full">
             {getItem(story).then((data) => (
-                <Card className="flex">
+                <Card className="flex items-center">
                     <CardHeader>
                         <CardTitle className="grid justify-items-center">
                             <Icons.chevronUp />

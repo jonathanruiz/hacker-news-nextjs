@@ -5,6 +5,7 @@ import { displayRelativeTime } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
     Card,
+    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -48,30 +49,36 @@ const UserPage = async ({ params }: any) => {
                     {user.submitted.map((submission: any) =>
                         getItem(submission).then((data) =>
                             data.type === "story" ? (
-                                <Card className="my-4">
+                                <Card className="my-4 flex items-center">
                                     <CardHeader>
-                                        <CardTitle className="text-2xl">
-                                            <a href={data.url}>{data.title}</a>
+                                        <CardTitle className="grid justify-items-center">
+                                            <Icons.chevronUp />
+                                            <span>{data.score}</span>
                                         </CardTitle>
                                     </CardHeader>
-                                    <CardFooter className="flex space-x-4 text-sm text-muted-foreground">
-                                        <div className="flex">
-                                            <Icons.chevronUp />
-                                            <Badge>{data.score}</Badge>
+                                    <CardContent>
+                                        <div className="text-2xl">
+                                            <a href={data.url}>
+                                                <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                                    {data.title}
+                                                </h2>
+                                            </a>
                                         </div>
-                                        <span>
-                                            {displayRelativeTime(data.time)}
-                                        </span>
-                                        <Link
-                                            className="ml-5 flex items-center"
-                                            href={`/discussion/${data.id}`}
-                                        >
-                                            <Icons.messageSquare />
-                                            <span className="ml-2 text-slate-900 dark:text-slate-400 ">
-                                                {data.descendants}
+                                        <div className="flex">
+                                            <span>
+                                                {displayRelativeTime(data.time)}
                                             </span>
-                                        </Link>
-                                    </CardFooter>
+                                            <Link
+                                                className="ml-5 flex items-center"
+                                                href={`/discussion/${data.id}`}
+                                            >
+                                                <Icons.messageSquare />
+                                                <span className="ml-2 text-slate-900 dark:text-slate-400 ">
+                                                    {data.descendants}
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    </CardContent>
                                 </Card>
                             ) : null
                         )
