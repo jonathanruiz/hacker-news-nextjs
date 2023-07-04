@@ -18,6 +18,22 @@ const UserPage = async ({ params }: any) => {
     const user = await getUser(params.id)
     user.submitted.length = 100 // prevent too long of a list
 
+    // Get user's submissions and comments. Check if they are stories or comments.
+    // If they are stories, display them in a card with the title, score, and link to the discussion.
+    // If they are comments, display them in a card with the comment text and link to the discussion.
+    // If they are neither, don't display them.
+    const submitted = await Promise.all(
+        user.submitted.map((submission: any) => getItem(submission))
+    )
+
+    const submissions = submitted.filter(
+        (submission: any) => submission.type === "story"
+    )
+
+    const comments = submitted.filter(
+        (comment: any) => comment.type === "comment"
+    )
+
     return (
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
             <Card className="w-1/2">
@@ -47,71 +63,69 @@ const UserPage = async ({ params }: any) => {
                     <TabsTrigger value="comments">Comments</TabsTrigger>
                 </TabsList>
                 <TabsContent value="submissions">
-                    {user.submitted.map((submission: any) =>
-                        getItem(submission).then((data) =>
-                            data.type === "story" ? (
-                                <Card
-                                    key={data.id}
-                                    className="my-4 flex items-center"
-                                >
-                                    <CardHeader>
-                                        <CardTitle className="grid justify-items-center">
-                                            <Icons.chevronUp />
-                                            <span>{data.score}</span>
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="text-2xl">
-                                            <a href={data.url}>
-                                                <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
-                                                    {data.title}
-                                                </h2>
-                                            </a>
-                                        </div>
-                                        <div className="flex">
-                                            <span>
-                                                {displayRelativeTime(data.time)}
-                                            </span>
-                                            <Link
-                                                className="ml-5 flex items-center"
-                                                href={`/discussion/${data.id}`}
-                                            >
-                                                <Icons.messageSquare />
-                                                <span className="ml-2 text-slate-900 dark:text-slate-400 ">
-                                                    {data.descendants}
-                                                </span>
-                                            </Link>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ) : null
-                        )
-                    )}
+                    {submissions
+                        ? submissions.map((story: any) => (
+                              <Card
+                                  key={story.id}
+                                  className="my-4 flex items-center"
+                              >
+                                  <CardHeader>
+                                      <CardTitle className="grid justify-items-center">
+                                          <Icons.chevronUp />
+                                          <span>{story.score}</span>
+                                      </CardTitle>
+                                  </CardHeader>
+                                  <CardContent>
+                                      <div className="text-2xl">
+                                          <a href={story.url}>
+                                              <h2 className="m-0 inline-block text-lg font-bold sm:text-lg md:text-xl">
+                                                  {story.title}
+                                              </h2>
+                                          </a>
+                                      </div>
+                                      <div className="flex">
+                                          <span>
+                                              {displayRelativeTime(story.time)}
+                                          </span>
+                                          <Link
+                                              className="ml-5 flex items-center"
+                                              href={`/discussion/${story.id}`}
+                                          >
+                                              <Icons.messageSquare />
+                                              <span className="ml-2 text-slate-900 dark:text-slate-400 ">
+                                                  {story.descendants}
+                                              </span>
+                                          </Link>
+                                      </div>
+                                  </CardContent>
+                              </Card>
+                          ))
+                        : "No submissions yet."}
                 </TabsContent>
                 <TabsContent value="comments">
-                    {user.submitted.map((submission: any) =>
-                        getItem(submission).then((data) =>
-                            data.type === "comment" ? (
-                                <Card key={data.id} className="my-4">
-                                    <CardHeader>
-                                        <CardDescription className="flex gap-4">
-                                            <div>
-                                                {displayRelativeTime(data.time)}
-                                            </div>
-                                            <div>({data.id})</div>
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardFooter className="flex space-x-4 text-sm">
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: `${data.text}`,
-                                            }}
-                                        />
-                                    </CardFooter>
-                                </Card>
-                            ) : null
-                        )
-                    )}
+                    {comments
+                        ? comments.map((comment: any) => (
+                              <Card key={comment.id} className="my-4">
+                                  <CardHeader>
+                                      <CardDescription className="flex gap-4">
+                                          <div>
+                                              {displayRelativeTime(
+                                                  comment.time
+                                              )}
+                                          </div>
+                                          <div>({comment.id})</div>
+                                      </CardDescription>
+                                  </CardHeader>
+                                  <CardFooter className="flex space-x-4 text-sm">
+                                      <div
+                                          dangerouslySetInnerHTML={{
+                                              __html: `${comment.text}`,
+                                          }}
+                                      />
+                                  </CardFooter>
+                              </Card>
+                          ))
+                        : "No comments yet."}
                 </TabsContent>
             </Tabs>
         </section>
