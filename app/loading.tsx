@@ -1,4 +1,4 @@
-import { ItemSkeleton } from "@/components/item-skeleton"
+import { ItemSkeleton } from "@/components/story-item"
 
 const Loading = () => {
     return (
